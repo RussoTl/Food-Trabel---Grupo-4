@@ -1,21 +1,17 @@
-#Este va a ser el archivo PRINCIPAL
-#Aqui vamos a crear la ventana principal.
-import tkinter as tk
-from views import MainMenuView
-from data import load_data
+import models.destino_culinario as destino_culinario, models.actividad as actividad, models.ruta_visita as ruta_visita, models.usuario as usuario, models.review as review, models.ubicacion as ubicacion
 
-class FoodieTourApp(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        self.title("Foodie Tour")
-        self.geometry("800x600")
+# PROGRAMA
+destino1 = destino_culinario.DestinoCulinario(
+    id=1,
+    tipo_cocina="Mediterránea 🍝",
+    ingredientes=["aceite de oliva",
+                  "tomates 🍅", "ajo 🧄", "pescado 🐟"],
+    precio_minimo=30.0,
+    precio_maximo=50.0,
+    popularidad=8.7,
+    disponibilidad=True,
+    id_ubicacion=123,
+    imagen="https://ejemplo.com/imagen_del_destino1.jpg"
+)
 
-        # Carga de datos desde archivos JSON
-        self.destinos_culinarios, self.actividades, self.rutas_visita, self.usuarios, self.reviews = load_data()
-
-        # Inicialización de la vista principal
-        self.main_menu_view = MainMenuView(self, self.destinos_culinarios, self.actividades, self.rutas_visita)
-
-if __name__ == "__main__":
-    app = FoodieTourApp()
-    app.mainloop()
+print(destino1)
