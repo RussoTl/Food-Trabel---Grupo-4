@@ -3,4 +3,4 @@ class controlador_inicio():
         self.app = app
         
     def mostrar_Menu(self):
-        self.app.cambiar_frame(self.app.menu)
+        self.app.cambiar_frame(self.app.vista_menu)
