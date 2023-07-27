@@ -1,3 +1,5 @@
+from tkinter import messagebox as MessageBox
+
 class usuario():
     numUsuarios = 0
     def __init__(self, nombre, contra):#, id, historial_rutas):
@@ -22,10 +24,10 @@ class usuario():
         else:
             self.intentos -= 1
             if self.intentos > 0:
-                print("Usuario o contraseña incorrecta, intentelo de nuevo.")
+                MessageBox.showinfo("Error","Usuario o contraseña incorrecta, intentelo de nuevo." f"Intentos restantes: {self.intentos}")
                 if contra != None:
                     return False
-                print(f"Intentos restantes: {self.intentos}")    
+                MessageBox.showinfo("Error", f"Intentos restantes: {self.intentos}")    
                 self.conectar()
             else:
                 print("A alcanzado el numero de intentos permitidos")

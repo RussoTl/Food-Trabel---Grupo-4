@@ -18,17 +18,20 @@ def createGUI():
     """ROOT (VENTANA PRINCIPAL)"""
     
     root.title("LogIn")
-    #MainFrame
+    """MAIN FRAME"""
     mainFrame = Frame(root)
     mainFrame.pack()
     mainFrame.config(width=400, height=320, bg="Orangered")
 
-    """TITULOS""" 
+    """LABELS""" 
     titulo = Label(mainFrame, text="Foodie Tour", font=("Comic Sans MS", 18, "bold"), bg="Orangered", underline=6)
     titulo.grid(column=0, row=0, padx=10, pady=10, columnspan=2)
- 
+    
+
     nombreLabel = Label(mainFrame, text="Usuario:",bg="Orangered", font=("Comic Sans MS", 14, "bold"), fg="gray7") #DarkGreen
     nombreLabel.grid(column=0, row=1)
+    
+
     passlLabel = Label(mainFrame, text="Contraseña:",bg="Orangered", font=("Comic Sans MS", 14, "bold"), fg="gray7")
     passlLabel.grid(column=0, row=2)
 
@@ -36,11 +39,11 @@ def createGUI():
     """ENTRADAS DE TEXTO"""
     
     nombreUsuario.set("")
-    nombreEntry = Entry(mainFrame, textvariable=nombreUsuario)
+    nombreEntry = CTkEntry(mainFrame, textvariable=nombreUsuario)
     nombreEntry.grid(column=1, row=1)
 
     passUsuario.set("")
-    passEntry = Entry(mainFrame, textvariable=passUsuario, show="*")
+    passEntry = CTkEntry(mainFrame, textvariable=passUsuario, show="*")
     passEntry.grid(column=1, row=2)
 
     """BOTONES DE REGISTRO DE USER E INICIO DE SESION"""
@@ -61,8 +64,8 @@ def iniciarSesion():
                 
                 MessageBox.showinfo("Conectado", f"Se inicio sesion en [{user.nombre}] correctamente.")
                 
-            else:
-                MessageBox.showerror("Error", "Contraseña incorrecta.")
+            #else:
+                #MessageBox.showerror("Error", "Contraseña incorrecta.")
             break 
     else:
         MessageBox.showerror("Error", "No existen usuarios con ese nombre.")
