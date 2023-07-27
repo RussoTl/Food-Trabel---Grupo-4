@@ -1,5 +1,5 @@
 from customtkinter import *
-from tkinter import Tk, Label, Entry, Frame, ttk, PhotoImage, StringVar, Button
+from tkinter import *
 from models.Usuario import usuario
 from tkinter import messagebox as MessageBox
 from PIL import Image, ImageTk
