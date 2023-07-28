@@ -23,6 +23,7 @@ def createGUI():
     mainFrame.pack()
     mainFrame.config(width=400, height=320, bg="Orangered")
 
+
     """LABELS""" 
     titulo = Label(mainFrame, text="Foodie Tour", font=("Comic Sans MS", 18, "bold"), bg="Orangered", underline=6)
     titulo.grid(column=0, row=0, padx=10, pady=10, columnspan=2)
