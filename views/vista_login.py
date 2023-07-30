@@ -85,6 +85,5 @@ def cambiar_frame(frame_destino):
         frame_destino.tkraise()
         
 if __name__== "__main__":
-    #user1 = usuario(input("Ingrese un Usuario: "), input("Ingrese una contraseña: "))
     createGUI()
     
