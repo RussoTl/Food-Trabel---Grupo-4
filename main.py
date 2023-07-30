@@ -50,7 +50,6 @@ class Aplicacion(tk.Tk):
     def cambiar_frame(self, frame_destino):
         frame_destino.tkraise()
         
-    
 
 if __name__== "__main__":
     app = Aplicacion()

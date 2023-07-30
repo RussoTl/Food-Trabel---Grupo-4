@@ -1,6 +1,6 @@
 from customtkinter import *
 from tkinter import *
-from models.Usuario import usuario
+from models.usuario import usuario
 from tkinter import messagebox as MessageBox
 from PIL import Image, ImageTk
 from controladores.vista_1 import controlador_inicio
