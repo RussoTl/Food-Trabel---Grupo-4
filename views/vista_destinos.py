@@ -86,7 +86,8 @@ class VistaDestinos(Frame):
 
     def cargar_imagenes(self):
         for destino in self.destinos:
-            imagen = ImageTk.PhotoImage(Image.open(f"Food-Trabel---Grupo-4/assets/{destino.imagen}").resize((200, 200)))
+            ruta_img = "assets/" + destino.imagen
+            imagen = ImageTk.PhotoImage(Image.open(ruta_img).resize((200, 200)))
             self.imagenes.append(imagen)
     
     def agregar_marcador_mapa(self, latitud, longitud, texto, imagen=None, destino=None):
