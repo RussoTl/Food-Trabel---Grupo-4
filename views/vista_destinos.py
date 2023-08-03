@@ -60,12 +60,7 @@ class VistaDestinos(Frame):
         self.cargar_destinos()
         self.cargar_marcadores()
         
-        
-    def cargar_destinos(self):
-        for destino in self.destinos:
-            self.lista_destinos.insert(END, destino.nombre)  # Agregar los destinos a la lista_destinos
-
-
+    
     def agregar_destino(self, destino):
         nombre = destino.nombre
         self.lista_destinos.insert(END, nombre)
@@ -73,19 +68,7 @@ class VistaDestinos(Frame):
     def agregar_marcador_mapa(self,coordenadas, texto, imagen=None):
         return self.mapa.set_marker(coordenadas[0], coordenadas[1], text=texto, image=imagen, command=self.seleccionar_ubicacion_callback)
 
-
-    def cargar_marcadores(self):
-        for ubicacion, destino in zip(self.ubicaciones, self.destinos):
-            imagen = self.imagenes[ubicacion.id - 1]
-            marcador = self.agregar_marcador_mapa(ubicacion.coordenadas[0], ubicacion.coordenadas[1], destino.nombre, imagen, destino)
-            marcador.hide_image(True)
-            self.marcadores.append(marcador)
         
-
-    def cargar_imagenes(self):
-        for destino in self.destinos:
-            imagen = ImageTk.PhotoImage(Image.open(f"assets/{destino.imagen}").resize((200, 200)))
-            self.imagenes.append(imagen)
     
     def agregar_marcador_mapa(self, latitud, longitud, texto, imagen=None, destino=None):
         if self.seleccionar_ubicacion_callback is not None:
@@ -93,6 +76,23 @@ class VistaDestinos(Frame):
         else:
             # Si self.seleccionar_ubicacion_callback es None, solo se creará el marcador sin comando.
             return self.mapa.set_marker(latitud, longitud, text=texto, image=imagen)
+
+        
+    def cargar_destinos(self):
+        for destino in self.destinos:
+            self.lista_destinos.insert(END, destino.nombre)  # Agregar los destinos a la lista_destinos
+
+    def cargar_imagenes(self):
+        for destino in self.destinos:
+            imagen = ImageTk.PhotoImage(Image.open(f"assets/{destino.imagen}").resize((200, 200)))
+            self.imagenes.append(imagen)
+    
+    def cargar_marcadores(self):
+        for ubicacion, destino in zip(self.ubicaciones, self.destinos):
+            imagen = self.imagenes[ubicacion.id - 1]
+            marcador = self.agregar_marcador_mapa(ubicacion.coordenadas[0], ubicacion.coordenadas[1], destino.nombre, imagen, destino)
+            marcador.hide_image(True)
+            self.marcadores.append(marcador)
 
     def seleccionar_destino(self, nombre_destino):
         destino_seleccionado = self.controladorDestino.buscar_destino_por_id(nombre_destino)
@@ -108,8 +108,6 @@ class VistaDestinos(Frame):
         if ubicacion_seleccionada:
             # Centrar el mapa en la ubicación seleccionada
             self.mapa.set_position(ubicacion_seleccionada.coordenadas[0], ubicacion_seleccionada.coordenadas[1])
-
-        self.imagen_seleccionada = None
     
     def seleccionar_ubicacion(self, marcador):
         if marcador.image_hidden is True:
@@ -126,5 +124,7 @@ class VistaDestinos(Frame):
             # Obtener el destino seleccionado
             nombre_destino = self.lista_destinos.get(indice_seleccionado)
             self.seleccionar_destino(nombre_destino)
+            
+    
     
     
