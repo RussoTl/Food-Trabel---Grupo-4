@@ -47,7 +47,6 @@ class VistaDestinos(Frame):
         self.frame_mapa.pack(side='right', fill='both', expand=True)
         
         
-        
         #Placeholder para el mapa
         self.mapa = TkinterMapView(self, width=400, height=600, corner_radius=0)
         self.mapa.set_position(-24.7930070, -65.4117382)
@@ -58,7 +57,7 @@ class VistaDestinos(Frame):
         self.cargar_imagenes()
         self.cargar_marcadores()
         self.cargar_destinos()
-        self.cargar_marcadores()
+
         
     
     def agregar_destino(self, destino):

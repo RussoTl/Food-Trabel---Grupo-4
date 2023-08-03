@@ -11,6 +11,8 @@ from controladores.controlador_rutas import ControladorRutas
 from controladores.controlador_reviews import ControladorReviews
 from models.destino_culinario import DestinoCulinario
 
+
+
 """VENTANA PRINCIPAL"""
 class Aplicacion(Tk):
     def __init__(self):
