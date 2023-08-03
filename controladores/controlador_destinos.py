@@ -10,9 +10,6 @@ class ControladorDestinos:
         for destino in self.destinos:
             if destino.nombre == nombre_destino:
                 return destino
-        raise ValueError(f"No se encontró ningún destino con el nombre '{nombre_destino}'")
-    
-
         
     def regresar_inicio(self):
         self.app.cambiar_frame(self.app.vista_inicio)

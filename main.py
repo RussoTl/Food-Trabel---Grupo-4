@@ -33,7 +33,7 @@ class Aplicacion(Tk):
         
         self.vista_inicio= VistaInicio(self, controlador_inicio)
         self.vista_actividades= VistaBusquedaFiltro(self, controlador_actividades)
-        self.vista_destinos = VistaDestinos(self, controlador_destinos, seleccionar_destino_callback=self.on_select_destino)
+        self.vista_destinos = VistaDestinos(self, controlador_destinos, seleccionar_destino_callback=self.selec_destino)
         self.vista_destinos.seleccionar_ubicacion_callback = self.vista_destinos.seleccionar_ubicacion
         self.vista_rutas= VistaRutas(self, controlador_rutas)
         self.vista_reviews= VistaReviews(self, controlador_reviews)
@@ -53,7 +53,7 @@ class Aplicacion(Tk):
     def cambiar_frame(self, frame_destino):
         frame_destino.tkraise()
         
-    def on_select_destino(self, nombre_destino):
+    def selec_destino(self, nombre_destino):
         self.controlador_destinos.seleccionar_destino(nombre_destino)
 
 if __name__== "__main__":

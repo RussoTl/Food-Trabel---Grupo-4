@@ -26,7 +26,7 @@ class VistaDestinos(Frame):
         
         #ListBox para los destinos
         self.lista_destinos = Listbox(self.frame_destinos, bg="Orangered", fg="gray7", font=("Comic Sans",8,"bold"))
-        self.lista_destinos.bind('<<ListboxSelect>>', self.on_select_destino)
+        self.lista_destinos.bind('<<ListboxSelect>>', self.selec_destino)
         self.lista_destinos.pack(fill='both', expand=True)
         
           
@@ -60,6 +60,7 @@ class VistaDestinos(Frame):
         self.cargar_destinos()
         self.cargar_marcadores()
         
+        
     def cargar_destinos(self):
         for destino in self.destinos:
             self.lista_destinos.insert(END, destino.nombre)  # Agregar los destinos a la lista_destinos
@@ -69,12 +70,9 @@ class VistaDestinos(Frame):
         nombre = destino.nombre
         self.lista_destinos.insert(END, nombre)
 
-    def agregar_marcador_mapa(self, latitud, longitud, texto, imagen=None, destino=None):
-        if self.seleccionar_ubicacion_callback is not None:
-            return self.mapa.set_marker(latitud, longitud, text=texto, image=imagen, command=lambda event: self.seleccionar_ubicacion(event, destino))
-        else:
-            # Si self.seleccionar_ubicacion_callback es None, solo se creará el marcador sin comando.
-            return self.mapa.set_marker(latitud, longitud, text=texto, image=imagen)
+    def agregar_marcador_mapa(self,coordenadas, texto, imagen=None):
+        return self.mapa.set_marker(coordenadas[0], coordenadas[1], text=texto, image=imagen, command=self.seleccionar_ubicacion_callback)
+
 
     def cargar_marcadores(self):
         for ubicacion, destino in zip(self.ubicaciones, self.destinos):
@@ -97,16 +95,6 @@ class VistaDestinos(Frame):
             # Si self.seleccionar_ubicacion_callback es None, solo se creará el marcador sin comando.
             return self.mapa.set_marker(latitud, longitud, text=texto, image=imagen)
 
-            
-    
-    def on_select_destino(self, event):
-        # Obtener el índice del elemento seleccionado
-        indice_seleccionado = self.lista_destinos.curselection()
-        if indice_seleccionado:
-            # Obtener el destino seleccionado
-            nombre_destino = self.lista_destinos.get(indice_seleccionado)
-            self.seleccionar_destino(nombre_destino)
-    
     def seleccionar_destino(self, nombre_destino):
         destino_seleccionado = self.controladorDestino.buscar_destino_por_id(nombre_destino)
         ubicacion_seleccionada = None
@@ -122,11 +110,22 @@ class VistaDestinos(Frame):
             # Centrar el mapa en la ubicación seleccionada
             self.mapa.set_position(ubicacion_seleccionada.coordenadas[0], ubicacion_seleccionada.coordenadas[1])
 
-
+        self.imagen_seleccionada = None
     
-    def seleccionar_ubicacion(self, event, destino):
-        if self.seleccionar_ubicacion_callback is not None:
-            if destino is not None:
-                print("Destino seleccionado:", destino.nombre)
-                # Aquí puedes mostrar la imagen o realizar cualquier acción adicional que necesites.
-     
+    def seleccionar_ubicacion(self, marcador):
+        if marcador.image_hidden is True:
+            marcador.hide_image(False)
+        else:
+            marcador.hide_image(True)
+        print("Ubicación seleccionada: ", marcador.text)
+        
+    
+    def selec_destino(self, event):
+        # Obtener el índice del elemento seleccionado
+        indice_seleccionado = self.lista_destinos.curselection()
+        if indice_seleccionado:
+            # Obtener el destino seleccionado
+            nombre_destino = self.lista_destinos.get(indice_seleccionado)
+            self.seleccionar_destino(nombre_destino)
+    
+    
