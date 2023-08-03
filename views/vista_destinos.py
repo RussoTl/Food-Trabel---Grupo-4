@@ -84,8 +84,7 @@ class VistaDestinos(Frame):
 
     def cargar_imagenes(self):
         for destino in self.destinos:
-            ruta_img = "assets/" + destino.imagen
-            imagen = ImageTk.PhotoImage(Image.open(ruta_img).resize((200, 200)))
+            imagen = ImageTk.PhotoImage(Image.open(f"assets/{destino.imagen}").resize((200, 200)))
             self.imagenes.append(imagen)
     
     def agregar_marcador_mapa(self, latitud, longitud, texto, imagen=None, destino=None):
